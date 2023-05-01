@@ -10,10 +10,13 @@ public class Brute_Force {
         System.out.println(n);
 
         int[][] = new int[n][n];
-        arr = 0;
-        arr[1] = 6
-        arr[2] = 12;
-        arr[3] = 5;
-        arr[1] =
+        arr[0][0] = 0;
+        arr[0][1] = 6
+        arr[0][2] = 12;
+        arr[0][3] = 5;
+        arr[1][0] = 6;
+        arr[1][1] = 0;
+        arr[1][2] = 
+
     }
 }
