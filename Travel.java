@@ -20,8 +20,6 @@ public class Travel {
 
         adjacencyList.get(3).add(new Edge(4, 13));
 
-        // display(adjacencyList);
-        // getDist(adjacencyList, 2, 4);
         bruteForce(adjacencyList, 1);
     }
 
@@ -35,13 +33,20 @@ public class Travel {
         }
     }
 
-    static void getDist(Map<Integer, List<Edge>> adjacencyList, int i, int j) {
+
+    static int getWeight(Map<Integer, List<Edge>> adjacencyList, int i, int j) {
         Edge e = adjacencyList.get(i).get(j-i-1);
-        System.out.println(e.weight);
+        return e.weight;
     }
     
     static void bruteForce(Map<Integer, List<Edge>> adjacencyList, int start) {
-        int len = 9999999;
+        int n = adjacencyList.size() - 1;
+        int[] path = new int[n];
+        for (int i = 1; i <= n; i++) {
+            path[i-1] = i + 1;
+        }
+        int[] shortestPath = new int[n];
+        int shortestDist = 99999999;
     }
 }
 
@@ -52,37 +57,6 @@ public class Edge {
     public Edge(int destination, int weight) {
         this.destination = destination;
         this.weight = weight;
-    }
-}
-
-public class WeightedGraph {
-    private Map<Integer, List<Edge>> adjacencyList;
-
-    public WeightedGraph() {
-        adjacencyList = new HashMap<>();
-    }
-
-    public void addVertex(int vertex) {
-        adjacencyList.put(vertex, new ArrayList<>());
-    }
-
-    public void addEdge(int source, int destination, int weight) {
-        Edge edge = new Edge(destination, weight);
-        adjacencyList.get(source).add(edge);
-    }
-
-    public List<Edge> getEdges(int vertex) {
-        return adjacencyList.get(vertex);
-    }
-
-    public int getWeight(int source, int destination) {
-        List<Edge> edges = adjacencyList.get(source);
-        for (Edge edge : edges) {
-            if (edge.destination == destination) {
-                return edge.weight;
-            }
-        }
-        return -1;
     }
 }
 
