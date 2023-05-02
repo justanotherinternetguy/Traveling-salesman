@@ -42,7 +42,6 @@ public class Travel {
     
     static void bruteForce(Map<Integer, List<Edge>> adjacencyList, int start) {
         int len = 9999999;
-
     }
 }
 
