@@ -19,8 +19,9 @@ public class Travel {
         adjacencyList.get(2).add(new Edge(4, 9));
 
         adjacencyList.get(3).add(new Edge(4, 13));
+        getWeight(adjacencyList, 1, 2);
 
-        bruteForce(adjacencyList, 1);
+        // bruteForce(adjacencyList, 1);
     }
 
     static void display(Map<Integer, List<Edge>> adjacencyList) {
@@ -33,20 +34,26 @@ public class Travel {
         }
     }
 
-
     static int getWeight(Map<Integer, List<Edge>> adjacencyList, int i, int j) {
         Edge e = adjacencyList.get(i).get(j-i-1);
+        System.out.println(e.weight);
         return e.weight;
     }
     
     static void bruteForce(Map<Integer, List<Edge>> adjacencyList, int start) {
         int n = adjacencyList.size() - 1;
-        int[] path = new int[n];
-        for (int i = 1; i <= n; i++) {
-            path[i-1] = i + 1;
+        int countPossiblePaths = factorial(n);
+        int shortestDist = Integer.MAX_VALUE;
+        int[][] allPossiblePaths = new int[countPossiblePaths][5];
+    }
+
+    static int factorial(int n) {
+        int factorial = 1;
+        for(int i = 1; i <= n; ++i)
+        {
+            factorial *= i;
         }
-        int[] shortestPath = new int[n];
-        int shortestDist = 99999999;
+        return factorial;
     }
 }
 
