@@ -44,15 +44,13 @@ public class Travel {
         int n = adjacencyList.size();
         int shortestDist = Integer.MAX_VALUE;
         int p = factorial(n-1);
-        int[][] allPossiblePaths = new int[p][n];
         int[] arr = {2, 3, 4};
 
-        ArrayList<int[]> permutations = new ArrayList<>();
+        ArrayList<int[]> allPossiblePaths = new ArrayList<>();
 
-        permute(arr, 0, permutations);
+        permute(arr, 0, allPossiblePaths);
 
-
-        for (int[] row : permutations) {
+        for (int[] row : allPossiblePaths) {
             for (int num : row) {
                 System.out.print(num + " ");
             }
