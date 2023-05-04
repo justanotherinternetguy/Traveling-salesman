@@ -49,17 +49,10 @@ public class Travel {
 
         ArrayList<int[]> permutations = new ArrayList<>();
 
-        // Generate all permutations of the array
         permute(arr, 0, permutations);
 
-        // Add permutations to a 2D array
-        int[][] result = new int[permutations.size()][arr.length];
-        for (int i = 0; i < permutations.size(); i++) {
-            result[i] = permutations.get(i);
-        }
 
-        // Print the 2D array
-        for (int[] row : result) {
+        for (int[] row : permutations) {
             for (int num : row) {
                 System.out.print(num + " ");
             }
