@@ -44,7 +44,47 @@ public class Travel {
         int n = adjacencyList.size();
         int shortestDist = Integer.MAX_VALUE;
         int p = factorial(n-1);
-        int[][] allPossiblePaths = new int[p][n]
+        int[][] allPossiblePaths = new int[p][n];
+        int[] arr = {2, 3, 4};
+
+        ArrayList<int[]> permutations = new ArrayList<>();
+
+        // Generate all permutations of the array
+        permute(arr, 0, permutations);
+
+        // Add permutations to a 2D array
+        int[][] result = new int[permutations.size()][arr.length];
+        for (int i = 0; i < permutations.size(); i++) {
+            result[i] = permutations.get(i);
+        }
+
+        // Print the 2D array
+        for (int[] row : result) {
+            for (int num : row) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+    static void permute(int[] arr, int start, ArrayList<int[]> permutations) {
+        if (start == arr.length - 1) {
+            // Add the current permutation to the list
+            permutations.add(arr.clone());
+        } else {
+            for (int i = start; i < arr.length; i++) {
+                // Swap the current element with the next element
+                swap(arr, start, i);
+                // Recursively generate permutations for the remaining elements
+                permute(arr, start + 1, permutations);
+                // Swap back the elements to restore the original array
+                swap(arr, start, i);
+            }
+        }
+    }
+    static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     static int factorial(int n) {
