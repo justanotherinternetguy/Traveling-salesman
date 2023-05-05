@@ -19,8 +19,8 @@ public class Travel {
         adjacencyList.get(2).add(new Edge(4, 9));
 
         adjacencyList.get(3).add(new Edge(4, 13));
-        getWeight(adjacencyList, 1, 2);
 
+        System.out.println("BRUTE FORCE: ");
         bruteForce(adjacencyList, 1);
     }
 
@@ -35,26 +35,36 @@ public class Travel {
     }
 
     static int getWeight(Map<Integer, List<Edge>> adjacencyList, int i, int j) {
-        Edge e = adjacencyList.get(i).get(j-i-1);
-        System.out.println(e.weight);
+        Edge e;
+        if (j < i) {
+            int temp = i;
+            i = j;
+            j = temp;
+        }
+        else if (j == i) System.err.println("BRUH MOMENT");
+        e = adjacencyList.get(i).get(j-i-1);
         return e.weight;
     }
     
     static void bruteForce(Map<Integer, List<Edge>> adjacencyList, int start) {
         int n = adjacencyList.size();
         int shortestDist = Integer.MAX_VALUE;
-        int p = factorial(n-1);
         int[] arr = {2, 3, 4};
 
         ArrayList<int[]> allPossiblePaths = new ArrayList<>();
 
         permute(arr, 0, allPossiblePaths);
 
-        for (int[] row : allPossiblePaths) {
-            for (int num : row) {
-                System.out.print(num + " ");
+        // now that we have all the possible paths, we can just start summing up the path lengths (remember to close off)
+        for (int i = 0; i < allPossiblePaths.size(); i++) {
+            int currDist = 0;
+            int prev = 1;
+            for (int j = 0; j < allPossiblePaths.get(i).length; j++) {
+                currDist += (getWeight(adjacencyList, prev, allPossiblePaths.get(i)[j]));
+                prev = allPossiblePaths.get(i)[j];
             }
-            System.out.println();
+            currDist += getWeight(adjacencyList, prev, 1);
+            System.out.println(currDist);
         }
     }
     static void permute(int[] arr, int start, ArrayList<int[]> permutations) {
