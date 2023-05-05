@@ -20,8 +20,12 @@ public class Travel {
 
         adjacencyList.get(3).add(new Edge(4, 13));
 
+        adjacencyList.get(4).add(new Edge(4, 0));
+
         System.out.println("BRUTE FORCE: ");
         bruteForce(adjacencyList, 1);
+        System.out.println("----------------");
+        nearestNeighbor(adjacencyList, 1);
     }
 
     static void display(Map<Integer, List<Edge>> adjacencyList) {
@@ -67,6 +71,37 @@ public class Travel {
             System.out.println(currDist);
         }
     }
+
+    static int[] findNearestNeighbor(Map<Integer, List<Edge>> adjacencyList, int curr) {
+        int n = adjacencyList.get(curr).size();
+        int nextPath = 0;
+        int nextWeight = 0;
+        int prevWeight = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            Edge e = adjacencyList.get(curr).get(i);
+            if (e.weight < prevWeight) {
+                nextPath = e.destination;
+                nextWeight = e.weight;
+            }
+        }
+        int[] res = new int[2];
+        res[0] = nextPath;
+        res[1] = nextWeight;
+        return res;
+    }
+    static void nearestNeighbor(Map<Integer, List<Edge>> adjacencyList, int start) {
+        // System.out.println(findNearestNeighbor(adjacencyList, start)[0]);
+        int n = adjacencyList.size();
+        int dist = 0;
+        dist += findNearestNeighbor(adjacencyList, start)[1];
+        int next = findNearestNeighbor(adjacencyList, start)[0];
+        for (int i = 0; i < n; i++) {
+            dist += findNearestNeighbor(adjacencyList, next)[1];
+            next = findNearestNeighbor(adjacencyList, next)[0];
+        }
+        System.out.println(dist);
+    }
+
     static void permute(int[] arr, int start, ArrayList<int[]> permutations) {
         if (start == arr.length - 1) {
             // Add the current permutation to the list
