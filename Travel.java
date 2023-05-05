@@ -104,15 +104,11 @@ public class Travel {
 
     static void permute(int[] arr, int start, ArrayList<int[]> permutations) {
         if (start == arr.length - 1) {
-            // Add the current permutation to the list
             permutations.add(arr.clone());
         } else {
             for (int i = start; i < arr.length; i++) {
-                // Swap the current element with the next element
                 swap(arr, start, i);
-                // Recursively generate permutations for the remaining elements
                 permute(arr, start + 1, permutations);
-                // Swap back the elements to restore the original array
                 swap(arr, start, i);
             }
         }
