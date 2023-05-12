@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
+int numVertices = 4;
 public class Travel {
     public static void main(String[] args) {
         Map<Integer, List<Edge>> adjacencyList = new HashMap<>();
         // Home = 1, Aldo = 2, Butch = 3, Cassidy = 4
-        int numVertices = 4;
 
         for (int i = 1; i <= numVertices; i++) {
             adjacencyList.put(i, new ArrayList<>());
@@ -24,7 +24,7 @@ public class Travel {
         System.out.println("BRUTE FORCE: ");
         bruteForce(adjacencyList, 1);
         System.out.println("----------------");
-        nearestNeighbor(adjacencyList, numVertices, 1);
+        nearestNeighbor(adjacencyList, 1);
     }
 
     static void display(Map<Integer, List<Edge>> adjacencyList) {
@@ -88,17 +88,10 @@ public class Travel {
         res[1] = nextWeight;
         return res;
     }
-    static void nearestNeighbor(Map<Integer, List<Edge>> adjacencyList, int numVertices, int start) {
-        // System.out.println(findNearestNeighbor(adjacencyList, start)[1]);
-        int next = start;
-        int[] curr;
+    static void nearestNeighbor(Map<Integer, List<Edge>> adjacencyList, int start) {
+        System.out.println(findNearestNeighbor(adjacencyList, start)[0]);
         int dist = 0;
         int pathLength = numVertices + 2;
-        for (int i = 0; i < numVertices; i++) {
-            curr = findNearestNeighbor(adjacencyList, next);
-            next = curr[0];
-            System.out.println(curr[1]);
-        }
     }
 
     static void permute(int[] arr, int start, ArrayList<int[]> permutations) {
