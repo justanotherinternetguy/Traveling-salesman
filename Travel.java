@@ -88,18 +88,45 @@ public class Travel {
         res[1] = nextWeight;
         return res;
     }
+
     static void nearestNeighbor(Map<Integer, List<Edge>> adjacencyList, int numVertices, int start) {
-        // System.out.println(findNearestNeighbor(adjacencyList, start)[1]);
-        int next = start;
-        int[] curr;
-        int dist = 0;
-        int pathLength = numVertices + 2;
-        for (int i = 0; i < numVertices; i++) {
-            curr = findNearestNeighbor(adjacencyList, next);
-            next = curr[0];
-            System.out.println(curr[1]);
+    List<Integer> path = new ArrayList<>();
+    path.add(start);
+
+    while (path.size() < numVertices) {
+        int curr = path.get(path.size() - 1);
+        int[] nearest = findNearestNeighbor(adjacencyList, curr);
+        int nextPath = nearest[0];
+
+        if (!path.contains(nextPath)) {
+            path.add(nextPath);
+        } else {
+            // if we encounter a repeated node, find the next nearest neighbor that we havent visited
+            for (int i = 2; i <= numVertices; i++) {
+                if (!path.contains(i)) {
+                    nextPath = i;
+                    break;
+                }
+            }
+            path.add(nextPath);
         }
     }
+
+    path.add(start);
+
+    System.out.println("Shortest cycle: " + path);
+
+    int totalDistance = 0;
+    for (int i = 0; i < path.size() - 1; i++) {
+        int curr = path.get(i);
+        int next = path.get(i + 1);
+        totalDistance += getWeight(adjacencyList, curr, next);
+    }
+
+    // Display the total distance
+    System.out.println("Total distance: " + totalDistance);
+    }
+
 
     static void permute(int[] arr, int start, ArrayList<int[]> permutations) {
         if (start == arr.length - 1) {
