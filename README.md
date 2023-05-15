@@ -1,2 +1,4 @@
 # Traveling-salesman
-bruh
+`bruteForce()`
+and 
+`nearestNeighbor()`
